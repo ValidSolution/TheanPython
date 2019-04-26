@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -27,14 +28,13 @@ def httpget(url):
     return urlopen(url)
 
 
-desurl = 'http://ip.360.cn/IPQuery/ipquery'
+desurl = 'http://ip.taobao.com/service/getIpInfo.php'
 params = {
     'ip': "8.8.8.8"
 }
 response = httpgetwithparam(desurl, params)
-print(response.status)
-print(response.reason)
-print(response.read())
-print(response.getheaders())
-
+resStr = response.read().decode()
+print(resStr)
+res = json.loads(resStr)
+print(res["data"]["country"])
 
