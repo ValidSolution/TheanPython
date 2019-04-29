@@ -18,3 +18,11 @@ def str2ts(string):
 def str2tswithformat(string, format):
     arr = time.strptime(string, format)
     return time.mktime(arr)
+
+
+datetime.datetime(1500099889)
+dt = datetime.datetime(2018, 5, 28, 12, 15, 45)
+while dt.second != 56:
+    date = dt.strftime('%Y-%m-%d %H:%M:%S')
+    print(date)
+    dt = dt + datetime.timedelta(seconds=1)
