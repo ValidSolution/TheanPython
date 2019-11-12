@@ -2,6 +2,7 @@
 # python text_recognition.py --east frozen_east_text_detection.pb --image images/example_01.jpg
 # python text_recognition.py --east frozen_east_text_detection.pb --image images/example_04.jpg --padding 0.05
 # tesseract example_02.jpg output -l chi_sim+osd --oem 1 --psm 11
+# tesseract ocr/6b7176de8121131a39dbd48b52506904.png stdout -l chi_sim --oem 1 --psm 13 -c tessedit_write_images=true -c language_model_ngram_on=1
 
 # import the necessary packages
 from imutils.object_detection import non_max_suppression
