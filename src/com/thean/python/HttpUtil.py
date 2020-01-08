@@ -28,13 +28,14 @@ def httpget(url):
     return urlopen(url)
 
 
-desurl = 'http://ip.taobao.com/service/getIpInfo.php'
-params = {
-    'ip': "8.8.8.8"
-}
-response = httpgetwithparam(desurl, params)
-resStr = response.read().decode()
-print(resStr)
-res = json.loads(resStr)
-print(res["data"]["country"])
+if __name__ == "__main__":
+    desurl = 'http://ip.taobao.com/service/getIpInfo.php'
+    params = {
+        'ip': "8.8.8.8"
+    }
+    response = httpgetwithparam(desurl, params)
+    resStr = response.read().decode()
+    print(resStr)
+    res = json.loads(resStr)
+    print(res["data"]["country"])
 
