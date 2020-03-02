@@ -8,15 +8,15 @@ def get_md5(bytes_arr):
 
 
 def iou2(position1, position2):
-    p1_x1 = position1.top_left.x
-    p1_y1 = position1.top_left.y
-    p1_x2 = position1.bottom_right.x
-    p1_y2 = position1.bottom_right.y
+    p1_x1 = position1[0]
+    p1_y1 = position1[1]
+    p1_x2 = position1[2]
+    p1_y2 = position1[3]
 
-    p2_x1 = position2.top_left.x
-    p2_y1 = position2.top_left.y
-    p2_x2 = position2.bottom_right.x
-    p2_y2 = position2.bottom_right.y
+    p2_x1 = position2[0]
+    p2_y1 = position2[1]
+    p2_x2 = position2[2]
+    p2_y2 = position2[3]
 
     start_x = max(p1_x1, p2_x1)
     start_y = max(p1_y1, p2_y1)
