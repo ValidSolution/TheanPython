@@ -12,6 +12,19 @@ def get_file_base64(pic):
         return str(encodestr, 'utf-8')
 
 
+# gts is an array of tuple which is (int[8], str)
+def draw_polygon(img, gts, color='red'):
+    draw = ImageDraw.Draw(img)
+    for gt in gts:
+        coo = gt[0]
+        draw.line([tuple((coo[0], coo[1])),
+                   tuple((coo[2], coo[3])),
+                   tuple((coo[4], coo[5])),
+                   tuple((coo[6], coo[7])),
+                   tuple((coo[0], coo[1]))], width=1, fill=color)
+    return img
+
+
 # codes from: https://github.com/Leungtamir/Image-Freehand/blob/master/image.py
 def hand_draw(input_path, output_path):
     L = np.asarray(Image.open(input_path).convert('L')).astype('float')  # 取得图像灰度
