@@ -1,8 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
-def draw_detect(image, rectangle, color='red'):
-    img = Image.open(image)
+def draw_single_rectangle(img, rectangle, color='red'):
     draw = ImageDraw.Draw(img)
     draw.line([tuple((rectangle[0], rectangle[1])),
                tuple((rectangle[2], rectangle[3])),
