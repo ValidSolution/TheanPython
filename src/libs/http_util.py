@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
-
 import json
+import requests
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+
+
+def http_get(url, value):
+    return requests.get(url, params=value)
+
+
+def http_post(url, value):
+    return requests.post(url, params=value)
 
 
 def httppost(url, values):
