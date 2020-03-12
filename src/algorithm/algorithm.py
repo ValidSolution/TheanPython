@@ -31,3 +31,21 @@ def iou2(position1, position2):
         area2 = (p2_x2 - p2_x1) * (p2_y2 - p2_y1)
         ratio = intersection_area / (area1 + area2 - intersection_area)
     return round(ratio, 2)
+
+
+# return the minimum 2^n which is not less than the given num
+def get_init_size(num):
+    if num <= 1:
+        return 1
+    num -= 1
+    num |= num >> 1
+    num |= num >> 2
+    num |= num >> 4
+    num |= num >> 8
+    num |= num >> 16
+    num += 1
+    return num
+
+
+if __name__ == "__main__":
+    print(get_init_size(123664))
