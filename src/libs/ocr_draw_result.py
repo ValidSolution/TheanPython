@@ -14,7 +14,6 @@ def draw_detect_reg(img_path, gts, color='red'):
     img = Image.open(img_path)
     font_path = "/Users/thean/Library/Fonts/msyh.ttf"
     canvas = Image.new('RGB', (img.size[0]*2, img.size[1]), (255, 255, 255))
-    font = ImageFont.truetype(font_path, int(12))
     canvas.paste(img, (0, 0, img.size[0], img.size[1]))
     draw = ImageDraw.Draw(canvas)
     for index in range(len(gts)):
@@ -25,6 +24,17 @@ def draw_detect_reg(img_path, gts, color='red'):
                    tuple((rectangle[4], rectangle[5])),
                    tuple((rectangle[6], rectangle[7])),
                    tuple((rectangle[0], rectangle[1]))], width=2, fill=color)
+
+        # 微软雅黑比普通字体大一些，这里手动减去两个像素，其他字体可以不减或适当调整
+        area_height = min(rectangle[5] - rectangle[1], rectangle[7] - rectangle[3]) - 2
+        fontsize = 18  # 预计比从1开始快一些
+        font = ImageFont.truetype(font_path, fontsize)
+        while font.getsize('我')[0] < area_height:
+            fontsize += 1
+            font = ImageFont.truetype(font_path, fontsize)
+        while font.getsize('我')[0] > area_height:
+            fontsize -= 1
+            font = ImageFont.truetype(font_path, fontsize)
         draw.text((rectangle[0] + img.size[0], rectangle[1]), text=content, fill=(64, 64, 64), font=font)
     return canvas
 
