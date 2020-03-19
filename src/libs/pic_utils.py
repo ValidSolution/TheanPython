@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PIL import Image, ImageFilter, ImageEnhance, ImageDraw, ImageFont
+from PIL import Image, ImageFilter, ImageEnhance, ImageDraw, ImageOps
 import numpy as np
 from io import BytesIO
 import base64
@@ -160,6 +160,19 @@ def base64_to_image(base64_str, image_path=None):
     if image_path:
         img.save(image_path)
     img.show()
+
+
+def revert_image(origin_image):
+    if origin_image.mode == 'RGBA':
+        r, g, b, a = origin_image.split()
+        rgb_image = Image.merge('RGB', (r, g, b))
+        inverted_image = ImageOps.invert(rgb_image)
+        r2, g2, b2 = inverted_image.split()
+        final_transparent_image = Image.merge('RGBA', (r2, g2, b2, a))
+        return final_transparent_image
+    else:
+        inverted_image = ImageOps.invert(origin_image)
+        return inverted_image
 
 
 if __name__ == "__main__":
