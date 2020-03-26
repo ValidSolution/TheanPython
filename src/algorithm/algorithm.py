@@ -1,6 +1,6 @@
 import hashlib
 import numpy
-
+from functools import cmp_to_key
 
 def get_md5(bytes_arr):
     md = hashlib.md5()
@@ -82,5 +82,23 @@ def find_lcseque(s1, s2):
     return ''.join(s)
 
 
+# coo: [[x0,y0,x1,y1,x2,y2,x3,y3]...]
+def cmp(coo1, coo2):
+    # 计算纵向iou
+    v1 = (min(coo1[1:8:2]), max(coo1[1:8:2]))
+    v2 = (min(coo2[1:8:2]), max(coo2[1:8:2]))
+
+    i = float(max(0, min(v1[1], v2[1]) - max(v1[0], v2[0])))
+    u = float(max(v1[1], v2[1]) - min(v1[0], v2[0]))
+
+    # 不相交或没有超过阈值，按y排序
+    if i/u < 0.7:
+        return coo1[1] - coo2[1]
+    else:
+        return coo1[0] - coo2[0]
+
+
 if __name__ == "__main__":
-    print(get_init_size(123664))
+    arr = [[0, 0, 4, 0, 4, 3, 0, 3], [2, 0, 6, 0, 6, 3, 2, 3], [0, 2, 4, 2, 4, 5, 0, 5]]
+    arr.sort(key=cmp_to_key(cmp))
+    print(arr)
